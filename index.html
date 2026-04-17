@@ -3,618 +3,569 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="福岡行程">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#c0392b">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23c0392b' width='100' height='100' rx='20'/><text x='50' y='68' text-anchor='middle' font-size='50'>🇯🇵</text></svg>">
 <title>福岡行程 04/25-04/28</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
-
-:root {
-  --bg: #f5f0e8;
-  --card: #ffffff;
-  --accent: #c0392b;
-  --accent2: #e74c3c;
-  --teal: #1a8a7d;
-  --navy: #2c3e50;
-  --gold: #d4a017;
-  --text: #2d2d2d;
-  --subtle: #7f8c8d;
-  --border: #e0d8cc;
-  --pink: #e8a0bf;
-  --shadow: 0 2px 16px rgba(0,0,0,0.06);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Noto Sans TC', 'PingFang TC', 'Hiragino Sans', 'Microsoft JhengHei', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-}
-
-.hero {
-  background: linear-gradient(135deg, var(--accent) 0%, #e74c3c 40%, var(--gold) 100%);
-  color: #fff;
-  padding: 2.5rem 1.5rem 2rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.hero::after {
-  content: '🇯🇵';
-  position: absolute;
-  font-size: 6rem;
-  opacity: 0.12;
-  right: -0.5rem;
-  top: 0.5rem;
-}
-.hero h1 {
-  font-size: 1.8rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-  margin-bottom: 0.3rem;
-}
-.hero .sub {
-  font-size: 0.95rem;
-  opacity: 0.9;
-  font-weight: 300;
-}
-
-.nav-bar {
-  display: flex;
-  gap: 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--navy);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.nav-bar a {
-  flex: 1;
-  min-width: max-content;
-  padding: 0.75rem 1rem;
-  text-align: center;
-  color: #fff;
-  text-decoration: none;
-  font-size: 0.82rem;
-  font-weight: 500;
-  border-bottom: 3px solid transparent;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-.nav-bar a:hover, .nav-bar a.active {
-  background: rgba(255,255,255,0.08);
-  border-bottom-color: var(--gold);
-}
-
-.container { max-width: 680px; margin: 0 auto; padding: 0 1rem 3rem; }
-
-/* Day Header */
-.day-header {
-  margin: 2rem 0 1rem;
-  padding: 1rem 1.2rem;
-  background: var(--navy);
-  color: #fff;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-.day-header .day-num {
-  font-size: 2.2rem;
-  font-weight: 900;
-  line-height: 1;
-  color: var(--gold);
-}
-.day-header .day-info h2 {
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-.day-header .day-info span {
-  font-size: 0.8rem;
-  opacity: 0.75;
-}
-
-/* Timeline */
-.timeline { position: relative; padding-left: 1.8rem; }
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 0.55rem;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--border);
-}
-.timeline-item {
-  position: relative;
-  margin-bottom: 1.2rem;
-}
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -1.45rem;
-  top: 0.6rem;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--bg);
-}
-
-/* Cards */
-.card {
-  background: var(--card);
-  border-radius: 14px;
-  padding: 1.2rem;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-}
-.card-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-.card p, .card li {
-  font-size: 0.88rem;
-  color: #444;
-  margin-bottom: 0.3rem;
-}
-.card ul {
-  list-style: none;
-  padding: 0;
-}
-.card ul li::before {
-  content: '▸ ';
-  color: var(--accent);
-  font-weight: 700;
-}
-
-/* Tags */
-.tag {
-  display: inline-block;
-  padding: 0.15rem 0.55rem;
-  border-radius: 6px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  margin-right: 0.3rem;
-  vertical-align: middle;
-}
-.tag-food { background: #ffeaea; color: var(--accent); }
-.tag-spot { background: #e8f6f5; color: var(--teal); }
-.tag-shop { background: #fff5e0; color: #b8860b; }
-.tag-transport { background: #eaf0f9; color: #2c5282; }
-.tag-hotel { background: #f3e8ff; color: #6b21a8; }
-.tag-tip { background: #fef3c7; color: #92400e; }
-
-/* Info rows */
-.info-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.4rem;
-  font-size: 0.85rem;
-  margin-bottom: 0.25rem;
-  color: #555;
-}
-.info-row .label {
-  font-weight: 600;
-  color: var(--navy);
-  min-width: 3rem;
-  flex-shrink: 0;
-}
-
-/* Section divider */
-.section-label {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--subtle);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 1.8rem 0 0.8rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 2px dashed var(--border);
-}
-
-/* Highlight box */
-.highlight {
-  background: linear-gradient(135deg, #fff5e0, #ffeaea);
-  border-left: 4px solid var(--gold);
-  border-radius: 0 10px 10px 0;
-  padding: 0.8rem 1rem;
-  margin: 0.8rem 0;
-  font-size: 0.85rem;
-}
-
-/* Shop grid */
-.shop-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-.shop-item {
-  background: #fafafa;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.5rem 0.7rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-.shop-item .loc {
-  font-size: 0.7rem;
-  color: var(--subtle);
-  margin-top: 0.15rem;
-}
-
-/* Must do */
-.must-do {
-  display: flex;
-  gap: 0.6rem;
-  margin: 0.5rem 0;
-  padding: 0.7rem;
-  background: #f8f8f8;
-  border-radius: 10px;
-}
-.must-do .num {
-  font-size: 1.3rem;
-  font-weight: 900;
-  color: var(--accent);
-  line-height: 1;
-  flex-shrink: 0;
-}
-.must-do .content { font-size: 0.85rem; }
-.must-do .content strong { color: var(--navy); }
-
-/* Route flow */
-.route-flow {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  padding: 0.8rem 0;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--navy);
-}
-.route-flow .arrow {
-  color: var(--accent);
-  font-weight: 700;
-}
-
-/* Collapsible */
-details {
-  margin-top: 0.5rem;
-}
-details summary {
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--teal);
-  padding: 0.3rem 0;
-  list-style: none;
-}
-details summary::before {
-  content: '▶ ';
-  font-size: 0.7rem;
-  transition: transform 0.2s;
-}
-details[open] summary::before {
-  content: '▼ ';
-}
-details .detail-content {
-  padding: 0.5rem 0 0.3rem 0.5rem;
-  font-size: 0.84rem;
-  color: #555;
-  border-left: 2px solid var(--border);
-  margin-left: 0.3rem;
-}
-
-/* Flight card */
-.flight-card {
-  background: linear-gradient(135deg, var(--navy), #34495e);
-  color: #fff;
-  border-radius: 14px;
-  padding: 1rem 1.2rem;
-  margin-bottom: 0.8rem;
-}
-.flight-card .flight-route {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  font-size: 1.3rem;
-  font-weight: 900;
-  margin: 0.5rem 0;
-}
-.flight-card .flight-route .plane { color: var(--gold); }
-.flight-card .flight-time {
-  text-align: center;
-  font-size: 0.85rem;
-  opacity: 0.85;
-}
-
-/* Offline badge */
-.offline-badge {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  background: var(--teal);
-  color: #fff;
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-  z-index: 200;
-}
-
-/* Responsive */
-@media (max-width: 400px) {
-  .hero h1 { font-size: 1.5rem; }
-  .shop-grid { grid-template-columns: 1fr; }
-  .card { padding: 1rem; }
-}
-
-/* Print styles */
-@media print {
-  .nav-bar, .offline-badge { display: none; }
-  .hero { padding: 1rem; }
-  .card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
-}
+:root{--bg:#f5f0e8;--card:#fff;--accent:#c0392b;--teal:#1a8a7d;--navy:#2c3e50;--gold:#d4a017;--text:#2d2d2d;--subtle:#7f8c8d;--border:#e0d8cc;--shadow:0 2px 16px rgba(0,0,0,.06);--link:#2563eb}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+.hero{background:linear-gradient(135deg,var(--accent),#e74c3c 40%,var(--gold));color:#fff;padding:2.5rem 1.5rem 2rem;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'🇯🇵';position:absolute;font-size:6rem;opacity:.12;right:-.5rem;top:.5rem}
+.hero h1{font-size:1.8rem;font-weight:900;letter-spacing:2px;margin-bottom:.3rem}
+.hero .sub{font-size:.95rem;opacity:.9;font-weight:300}
+.nav-bar{display:flex;position:sticky;top:0;z-index:100;background:var(--navy);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nav-bar a{flex:1;min-width:max-content;padding:.75rem .8rem;text-align:center;color:#fff;text-decoration:none;font-size:.78rem;font-weight:500;border-bottom:3px solid transparent;white-space:nowrap}
+.nav-bar a:hover{background:rgba(255,255,255,.08);border-bottom-color:var(--gold)}
+.container{max-width:680px;margin:0 auto;padding:0 1rem 3rem}
+.day-header{margin:2rem 0 1rem;padding:1rem 1.2rem;background:var(--navy);color:#fff;border-radius:12px;display:flex;align-items:center;gap:.8rem}
+.day-header .day-num{font-size:2.2rem;font-weight:900;line-height:1;color:var(--gold)}
+.day-header .day-info h2{font-size:1.05rem;font-weight:700}
+.day-header .day-info span{font-size:.8rem;opacity:.75}
+.timeline{position:relative;padding-left:1.8rem}
+.timeline::before{content:'';position:absolute;left:.55rem;top:0;bottom:0;width:2px;background:var(--border)}
+.ti{position:relative;margin-bottom:1.1rem}
+.ti::before{content:'';position:absolute;left:-1.45rem;top:.6rem;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.card{background:var(--card);border-radius:14px;padding:1.1rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card-title{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.card p,.card li{font-size:.85rem;color:#444;margin-bottom:.25rem}
+.card ul{list-style:none;padding:0}
+.card ul li::before{content:'▸ ';color:var(--accent);font-weight:700}
+.tag{display:inline-block;padding:.12rem .5rem;border-radius:6px;font-size:.7rem;font-weight:600;margin-right:.3rem;flex-shrink:0}
+.tag-food{background:#ffeaea;color:var(--accent)}
+.tag-spot{background:#e8f6f5;color:var(--teal)}
+.tag-shop{background:#fff5e0;color:#b8860b}
+.tag-transport{background:#eaf0f9;color:#2c5282}
+.tag-hotel{background:#f3e8ff;color:#6b21a8}
+.tag-tip{background:#fef3c7;color:#92400e}
+.tag-rain{background:#e0e7ff;color:#3730a3}
+.ir{display:flex;align-items:flex-start;gap:.4rem;font-size:.83rem;margin-bottom:.2rem;color:#555}
+.ir .l{font-weight:600;color:var(--navy);min-width:2.8rem;flex-shrink:0}
+.sl{font-size:.75rem;font-weight:700;color:var(--subtle);text-transform:uppercase;letter-spacing:2px;margin:1.5rem 0 .7rem;padding-bottom:.3rem;border-bottom:2px dashed var(--border)}
+.hl{background:linear-gradient(135deg,#fff5e0,#ffeaea);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:.7rem 1rem;margin:.6rem 0;font-size:.83rem}
+.rf{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem;padding:.6rem 0;font-size:.8rem;font-weight:500;color:var(--navy)}
+.rf .ar{color:var(--accent);font-weight:700}
+.ml{display:inline-flex;align-items:center;gap:.25rem;background:#e8f5e9;color:#1b7a2e;padding:.25rem .6rem;border-radius:8px;font-size:.75rem;font-weight:600;text-decoration:none;margin-top:.3rem;margin-right:.3rem;border:1px solid #c8e6c9}
+.ml:hover{background:#c8e6c9}
+.ml::before{content:'📍'}
+.el{display:inline-flex;align-items:center;gap:.25rem;background:#eaf0f9;color:#2c5282;padding:.25rem .6rem;border-radius:8px;font-size:.75rem;font-weight:600;text-decoration:none;margin-top:.3rem;margin-right:.3rem;border:1px solid #bfdbfe}
+.el:hover{background:#bfdbfe}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.5rem}
+.si{background:#fafafa;border:1px solid var(--border);border-radius:8px;padding:.45rem .65rem;font-size:.78rem;font-weight:500}
+.si .loc{font-size:.68rem;color:var(--subtle);margin-top:.1rem}
+.si a.ml{margin-top:.25rem;font-size:.68rem;padding:.15rem .4rem}
+.md{display:flex;gap:.5rem;margin:.4rem 0;padding:.6rem;background:#f8f8f8;border-radius:10px}
+.md .n{font-size:1.2rem;font-weight:900;color:var(--accent);line-height:1;flex-shrink:0}
+.md .c{font-size:.83rem}
+.md .c strong{color:var(--navy)}
+details{margin-top:.4rem}
+details summary{cursor:pointer;font-size:.83rem;font-weight:600;color:var(--teal);padding:.25rem 0;list-style:none}
+details summary::before{content:'▶ ';font-size:.68rem}
+details[open] summary::before{content:'▼ '}
+details .dc{padding:.4rem 0 .2rem .5rem;font-size:.82rem;color:#555;border-left:2px solid var(--border);margin-left:.3rem}
+.fc{background:linear-gradient(135deg,var(--navy),#34495e);color:#fff;border-radius:14px;padding:1rem 1.2rem;margin-bottom:.8rem}
+.fc .fr{display:flex;align-items:center;justify-content:center;gap:1rem;font-size:1.3rem;font-weight:900;margin:.5rem 0}
+.fc .fr .pl{color:var(--gold)}
+.fc .ft{text-align:center;font-size:.83rem;opacity:.85}
+.ob{position:fixed;bottom:1rem;right:1rem;background:var(--teal);color:#fff;padding:.4rem .8rem;border-radius:20px;font-size:.7rem;font-weight:600;box-shadow:0 2px 10px rgba(0,0,0,.15);z-index:200}
+.restaurant-list .card{margin-bottom:.7rem}
+@media(max-width:400px){.hero h1{font-size:1.5rem}.sg{grid-template-columns:1fr}.card{padding:.9rem}}
+@media print{.nav-bar,.ob{display:none}.hero{padding:1rem}.card{break-inside:avoid;box-shadow:none;border:1px solid #ccc}}
 </style>
 </head>
 <body>
 
-<!-- Hero -->
 <div class="hero">
   <h1>福岡 FUKUOKA</h1>
   <div class="sub">04/25（六）— 04/28（二）・4天3夜</div>
 </div>
 
-<!-- Nav -->
 <div class="nav-bar">
-  <a href="#day1">Day 1</a>
-  <a href="#day2">Day 2</a>
-  <a href="#day3">Day 3</a>
-  <a href="#day4">Day 4</a>
-  <a href="#info">實用資訊</a>
+  <a href="#day1">Day1 博多</a>
+  <a href="#day2">Day2 糸島</a>
+  <a href="#day3">Day3 太宰府</a>
+  <a href="#day4">Day4 回程</a>
+  <a href="#food">美食清單</a>
+  <a href="#shop">購物</a>
+  <a href="#tips">小貼士</a>
 </div>
 
 <div class="container">
 
-<!-- ============ DAY 1 ============ -->
+<!-- ==================== DAY 1 ==================== -->
 <div id="day1">
   <div class="day-header">
     <div class="day-num">01</div>
     <div class="day-info">
       <h2>04/25（六）抵達福岡</h2>
-      <span>機場 → 博多 → 運河城 → 中洲屋台</span>
+      <span>機場→博多→運河城→中洲屋台</span>
     </div>
   </div>
 
-  <!-- Flight -->
-  <div class="flight-card">
-    <div class="flight-time">🚗 04:00 司機接送至機場（$1,000元）</div>
-    <div class="flight-route">
-      <span>TPE</span>
-      <span class="plane">✈</span>
-      <span>FUK</span>
-    </div>
-    <div class="flight-time">06:45 出發 → 10:05 抵達</div>
-    <div style="text-align:center;font-size:0.78rem;opacity:0.6;margin-top:0.5rem;">另一班：BKK→FUK 00:30→07:55</div>
+  <div class="fc">
+    <div class="ft">🚗 04:00 司機接送至機場（$1,000元）</div>
+    <div class="fr"><span>TPE</span><span class="pl">✈</span><span>FUK</span></div>
+    <div class="ft">06:45 出發 → 10:05 抵達</div>
+    <div style="text-align:center;font-size:.75rem;opacity:.6;margin-top:.4rem">另一班：BKK→FUK 00:30→07:55</div>
   </div>
 
-  <!-- Route Overview -->
-  <div class="highlight">
+  <div class="hl">
     <strong>🗺️ 今日路線</strong>
-    <div class="route-flow">
-      <span>機場</span><span class="arrow">→</span>
-      <span>博多牛まぶし</span><span class="arrow">→</span>
-      <span>飯店寄放行李</span><span class="arrow">→</span>
-      <span>櫛田神社</span><span class="arrow">→</span>
-      <span>博多運河城</span><span class="arrow">→</span>
-      <span>中洲屋台</span><span class="arrow">→</span>
-      <span>飯店</span>
+    <div class="rf">
+      <span>機場</span><span class="ar">→</span><span>博多牛まぶし</span><span class="ar">→</span><span>飯店寄行李</span><span class="ar">→</span><span>櫛田神社</span><span class="ar">→</span><span>博多運河城</span><span class="ar">→</span><span>中洲屋台</span><span class="ar">→</span><span>飯店</span>
     </div>
   </div>
 
   <div class="timeline">
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-transport">交通</span> 福岡機場 → 博多站</div>
+      <p>搭<strong>免費接駁巴士</strong>到機場地鐵站，再搭地鐵到博多站（K11）</p>
+      <p>博多站筑紫口步行約 5～8 分鐘到餐廳</p>
+      <a class="el" href="https://www.instagram.com/reel/DJeYRJzTPP2/?igsh=Z3hxbnRnbDR6Ymhu" target="_blank">🎬 接駁巴士教學</a>
+    </div></div>
 
-    <!-- Transport -->
-    <div class="timeline-item">
-      <div class="card">
-        <div class="card-title"><span class="tag tag-transport">交通</span> 機場→博多站</div>
-        <p>搭免費接駁巴士到機場地鐵站，再搭地鐵到博多站（K11）</p>
-        <p>博多站筑紫口步行約 5～8 分鐘到餐廳</p>
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-food">午餐</span> 黒毛和牛 博多牛まぶし 武蔵</div>
+      <div class="ir"><span class="l">📍 地址</span>福岡市博多區博多站東1-12-3</div>
+      <div class="ir"><span class="l">🚶 交通</span>博多站筑紫口步行約 2 分鐘</div>
+      <div class="ir"><span class="l">💰 價位</span>¥3,000 起</div>
+      <div class="ir"><span class="l">⏰ 建議</span>11:00 前到（避開排隊）</div>
+      <div class="hl">🍖 中午常需排 30～60 分鐘，可考慮提早排隊</div>
+      <a class="ml" href="https://maps.app.goo.gl/9SpRwwjAvZpTxZrX9" target="_blank">Google Map</a>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-hotel">飯店</span> 寄放行李</div>
+      <p>🚇 中洲川端站 → 機場線 → 大濠公園站（約30分鐘）</p>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-spot">景點</span> 櫛田神社</div>
+      <div class="ir"><span class="l">📍 地址</span>福岡市博多區上川端町1-41</div>
+      <div class="ir"><span class="l">⏰ 開放</span>9:00～17:00</div>
+      <div class="ir"><span class="l">🚶 交通</span>地鐵「祇園站」2號出口，步行5分鐘</div>
+      <a class="ml" href="https://maps.app.goo.gl/BAunsD3FyfBNVc269" target="_blank">Google Map</a>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-spot">景點</span> 博多運河城 Canal City</div>
+      <p>從飯店步行約 10～12 分鐘 ／「櫛田神社前站」徒步3分</p>
+      <a class="ml" href="https://maps.app.goo.gl/iGLnMC8EtSonNJqe8" target="_blank">Google Map</a>
+
+      <div class="sl">🎯 必做 3 件事</div>
+      <div class="md"><div class="n">①</div><div class="c"><strong>水舞秀</strong>：太陽廣場，每晚整點音樂版、半點無音樂版<br>19:00 鋼彈主題秀（約10分鐘）<br><a class="el" href="https://canalcity.co.jp/zh-tw/event/detail/503" target="_blank">🔗 官方時刻表</a></div></div>
+      <div class="md"><div class="n">②</div><div class="c"><strong>拉麵競技場</strong>：整層集合多家拉麵店</div></div>
+      <div class="md"><div class="n">③</div><div class="c"><strong>拍照打卡</strong>：中庭水道＋彩色建築</div></div>
+
+      <div class="sl">🛍️ 商店</div>
+      <div class="sg">
+        <div class="si">🐯 Onitsuka Tiger<div class="loc">North Bldg 2F｜10-21時</div><a class="ml" href="https://maps.app.goo.gl/MT4pSPRq4fTZmSi39" target="_blank">地圖</a></div>
+        <div class="si">MUJI 無印良品</div>
+        <div class="si">松本清</div>
+        <div class="si">扭蛋百貨</div>
+        <div class="si">🏰 Disney Store</div>
+        <div class="si">ABC Mart</div>
+        <div class="si">Alpen FUKUOKA<div class="loc">南館 1-3F｜10-21時</div></div>
+        <div class="si">THANK YOU MART<div class="loc">Center Walk B1F｜10-21時<br>全品 ¥390 均一價</div></div>
       </div>
-    </div>
 
-    <!-- Lunch -->
-    <div class="timeline-item">
-      <div class="card">
-        <div class="card-title"><span class="tag tag-food">午餐</span> 黒毛和牛 博多牛まぶし 武蔵</div>
-        <div class="info-row"><span class="label">📍 地址</span>福岡縣福岡市博多區博多站東1-12-3</div>
-        <div class="info-row"><span class="label">🚶 交通</span>博多站筑紫口步行約 2 分鐘</div>
-        <div class="info-row"><span class="label">💰 價位</span>¥3,000 起</div>
-        <div class="info-row"><span class="label">⏰ 建議</span>11:00 前到（避開排隊）</div>
-        <div class="highlight">🍖 中午常需排 30～60 分鐘，可考慮提早排隊</div>
-      </div>
-    </div>
-
-    <!-- Hotel -->
-    <div class="timeline-item">
-      <div class="card">
-        <div class="card-title"><span class="tag tag-hotel">飯店</span> 寄放行李</div>
-        <p>🚇 中洲川端站 → 機場線 → 大濠公園站（約30分鐘）</p>
-      </div>
-    </div>
-
-    <!-- Kushida Shrine -->
-    <div class="timeline-item">
-      <div class="card">
-        <div class="card-title"><span class="tag tag-spot">景點</span> 櫛田神社</div>
-        <div class="info-row"><span class="label">📍 地址</span>福岡市博多區上川端町1-41</div>
-        <div class="info-row"><span class="label">⏰ 開放</span>9:00～17:00</div>
-        <div class="info-row"><span class="label">🚶 交通</span>地鐵「祇園站」2號出口，步行5分鐘</div>
-      </div>
-    </div>
-
-    <!-- Canal City -->
-    <div class="timeline-item">
-      <div class="card">
-        <div class="card-title"><span class="tag tag-spot">景點</span> 博多運河城 Canal City Hakata</div>
-        <p style="margin-bottom:0.5rem;">從中洲川端東方快捷酒店步行約 10～12 分鐘</p>
-        <div class="info-row"><span class="label">🚇 最近</span>「櫛田神社前站」徒步3分 ／「中州川端站」徒步10分</div>
-
-        <div class="section-label">🎯 必做 3 件事</div>
-        <div class="must-do">
-          <div class="num">①</div>
-          <div class="content"><strong>水舞秀</strong>：太陽廣場，每晚 10:00～22:00 整點有音樂版、半點無音樂版。<br>19:00 有鋼彈主題秀（約10分鐘）</div>
+      <details>
+        <summary>🍽️ 運河城內餐廳</summary>
+        <div class="dc">
+          <p><strong>鰻のエイト</strong>（鰻魚・米其林系列）<br>📍 KUOHKA Grand Bldg. B1F<br>平日 11:00-15:00/17:00-23:00｜週末 11:00-23:00<br>招牌：蒸籠鰻魚御膳、鰻魚牛肉石燒御膳</p>
+          <p style="margin-top:.5rem"><strong>魚之丸秀</strong>（海鮮居酒屋）<br>📍 KUOHKA Grand Bldg. B1F<br>平日 11:00-14:00/17:00-23:00｜週末 11:00-23:00<br>招牌：主廚特選握壽司10貫、生魚片拼盤<br>📱 QR Code 中文菜單｜B1F有退稅櫃台</p>
         </div>
-        <div class="must-do">
-          <div class="num">②</div>
-          <div class="content"><strong>拉麵競技場</strong>：整層集合多家拉麵店，直接選順眼的吃</div>
-        </div>
-        <div class="must-do">
-          <div class="num">③</div>
-          <div class="content"><strong>拍照打卡</strong>：中庭水道 + 彩色建築，超好拍！</div>
-        </div>
+      </details>
+    </div></div>
 
-        <div class="section-label">🛍️ 商店導覽</div>
-        <div class="shop-grid">
-          <div class="shop-item">🐯 Onitsuka Tiger<div class="loc">North Building 2F｜10:00-21:00</div></div>
-          <div class="shop-item">MUJI 無印良品<div class="loc"></div></div>
-          <div class="shop-item">松本清<div class="loc"></div></div>
-          <div class="shop-item">扭蛋百貨<div class="loc"></div></div>
-          <div class="shop-item">🏰 Disney Store<div class="loc"></div></div>
-          <div class="shop-item">ABC Mart<div class="loc"></div></div>
-          <div class="shop-item">Alpen FUKUOKA<div class="loc">南館 1F～3F｜10:00-21:00</div></div>
-          <div class="shop-item">THANK YOU MART<div class="loc">Center Walk 南側 B1F｜10:00-21:00</div></div>
-        </div>
-
-        <details>
-          <summary>🍽️ 運河城內餐廳</summary>
-          <div class="detail-content">
-            <p><strong>鰻のエイト</strong>（鰻魚料理）<br>
-              📍 KUOHKA Grand Bldg. B1F<br>
-              平日 11:00-15:00 / 17:00-23:00<br>
-              週末 11:00-23:00</p>
-            <p style="margin-top:0.5rem;"><strong>魚之丸秀</strong>（海鮮居酒屋）<br>
-              📍 KUOHKA Grand Bldg. B1F<br>
-              平日 11:00-14:00 / 17:00-23:00<br>
-              週末 11:00-23:00</p>
-          </div>
-        </details>
-      </div>
-    </div>
-
-    <!-- Yatai -->
-    <div class="timeline-item">
-      <div class="card">
-        <div class="card-title"><span class="tag tag-food">宵夜</span> 中洲屋台</div>
-        <p>飯店步行 5～8 分鐘 → 櫛田神社 → 中洲屋台 → 回飯店</p>
-        <div class="highlight">💡 屋台通常傍晚開始營業，建議晚餐後散步過去體驗</div>
-      </div>
-    </div>
-
-  </div><!-- end timeline -->
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-food">宵夜</span> 中洲屋台</div>
+      <p>飯店步行 5～8 分鐘 → 櫛田神社 → 中洲屋台 → 回飯店</p>
+      <a class="ml" href="https://share.google/DeU1ZjsiuGTp8ftU6" target="_blank">Google Map</a>
+      <a class="el" href="https://www.bring-you.info/zh-tw/fukuoka-hakata-nakasu-yatai" target="_blank">🔗 屋台攻略</a>
+    </div></div>
+  </div>
 </div>
 
-<!-- ============ DAY 2 ============ -->
+<!-- ==================== DAY 2 ==================== -->
 <div id="day2">
   <div class="day-header">
     <div class="day-num">02</div>
     <div class="day-info">
-      <h2>04/26（日）</h2>
-      <span>行程待安排</span>
+      <h2>04/26（日）糸島</h2>
+      <span>夫婦岩→海鮮堂→天使之翼→椰子樹鞦韆</span>
     </div>
   </div>
-  <div class="card" style="margin-top:1rem;text-align:center;padding:2rem;color:var(--subtle);">
-    <p>📝 尚未提供 Day 2 行程</p>
-    <p style="font-size:0.8rem;">可自行加入規劃</p>
+
+  <div class="hl">
+    <strong>🚇 交通方式</strong><br>
+    地下鐵機場線 → JK04「九大學研都市站」→ 出站左邊轉搭「昭和巴士 西之浦線」往「二見浦」方向 → 於「月與太陽糸島茶房前」下車
+  </div>
+
+  <div class="card" style="margin-bottom:1rem">
+    <div class="card-title"><span class="tag tag-transport">交通</span> 巴士時刻表（星期日）</div>
+    <p>⚠️ 需提早至少10分鐘等車</p>
+    <p><strong>🚌 去程（九大學研都市 → 二見浦）</strong></p>
+    <p>09:45 ／ <strong>10:34 ⭐推薦</strong> ／ 11:34</p>
+    <p style="margin-top:.3rem"><strong>🚌 回程（二見浦 → 九大學研都市）</strong></p>
+    <p><strong>14:20 ⭐推薦</strong> ／ 15:20 ／ 16:20</p>
+  </div>
+
+  <div class="timeline">
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-spot">景點</span> 櫻井二見浦夫婦岩</div>
+      <a class="ml" href="https://maps.app.goo.gl/BrFdshH2Ut6oXkXs8" target="_blank">Google Map</a>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-food">午餐</span> 糸島海鮮堂 本店</div>
+      <a class="ml" href="https://maps.app.goo.gl/9yMooTB2jSNxbdea8" target="_blank">Google Map</a>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-spot">景點</span> 天使之翼 PALM BEACH THE GARDENS</div>
+      <a class="ml" href="https://maps.app.goo.gl/DfAhTZBJE9wW7gvMA" target="_blank">Google Map</a>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-spot">景點</span> 糸島椰子樹鞦韆</div>
+      <a class="ml" href="https://maps.app.goo.gl/u6SRyFL2faVJua1y5" target="_blank">Google Map</a>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-spot">咖啡</span> 糸島茶房</div>
+      <a class="ml" href="https://maps.app.goo.gl/Ta59g8M5CcbkDRVb8" target="_blank">Google Map</a>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-spot">景點</span> 更多糸島景點</div>
+      <p>PALM BEACH 棕櫚海灘</p>
+      <a class="ml" href="https://maps.app.goo.gl/hvGVcgULdLmcnq61A" target="_blank">棕櫚海灘</a>
+      <a class="ml" href="https://maps.app.goo.gl/e1QaeYgKqQysmrpw5" target="_blank">椰子樹鞦韆(ざうお本店前)</a>
+    </div></div>
+  </div>
+
+  <!-- Rain backup -->
+  <div class="card" style="margin-top:.5rem;border-left:4px solid #6366f1">
+    <div class="card-title"><span class="tag tag-rain">雨天備案</span> 小倉＋門司港</div>
+    <p>飯店 → 博多站 → JR → 小倉城 → 門司港</p>
+    <div class="sl">景點</div>
+    <p><strong>小倉城</strong>｜成人¥350｜9:00-20:00｜JR小倉站步行15分</p>
+    <a class="ml" href="https://maps.app.goo.gl/LHGDgSWiZUaE2DJQA" target="_blank">小倉城</a>
+    <p style="margin-top:.3rem"><strong>門司港懷舊區</strong>｜紅磚建築・港口風景・藍翼橋</p>
+    <a class="ml" href="https://maps.app.goo.gl/dLWE4QWFhDUMYUjg7" target="_blank">門司港</a>
+
+    <details>
+      <summary>更多：皿倉山夜景</summary>
+      <div class="dc">
+        <p><strong>皿倉山展望台</strong>｜日本新三大夜景之一</p>
+        <p>纜車：成人¥1,200｜兒童¥600</p>
+        <p>平日 10:00-18:00｜週五六日假 10:00-22:00</p>
+        <p>交通：JR八幡站搭計程車5分鐘，或週末免費接駁車</p>
+      </div>
+    </details>
   </div>
 </div>
 
-<!-- ============ DAY 3 ============ -->
+<!-- ==================== DAY 3 ==================== -->
 <div id="day3">
   <div class="day-header">
     <div class="day-num">03</div>
     <div class="day-info">
-      <h2>04/27（一）</h2>
-      <span>行程待安排</span>
+      <h2>04/27（一）太宰府 → 天神</h2>
+      <span>星巴克→天滿宮→竈門神社→天神購物</span>
     </div>
   </div>
-  <div class="card" style="margin-top:1rem;text-align:center;padding:2rem;color:var(--subtle);">
-    <p>📝 尚未提供 Day 3 行程</p>
-    <p style="font-size:0.8rem;">可自行加入規劃</p>
+
+  <div class="hl">
+    <strong>🚇 交通</strong>：博多站地鐵→天神站→西鐵天神大牟田線→二日市站→太宰府線（約35-45分・¥630）
+  </div>
+
+  <div class="timeline">
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-spot">景點</span> 星巴克 太宰府天滿宮表參道店</div>
+      <a class="ml" href="https://maps.app.goo.gl/HQkH9WMAsiju8g2AA" target="_blank">Google Map</a>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-spot">景點</span> 太宰府天滿宮</div>
+      <div class="ir"><span class="l">📍 地址</span>太宰府市宰府4-7-1</div>
+      <div class="ir"><span class="l">⏰ 開放</span>6:30～19:00（季節調整）</div>
+      <div class="ir"><span class="l">💰 寶物殿</span>大人¥500</div>
+      <a class="ml" href="https://maps.app.goo.gl/5NxKLFUGBxARh7UVA" target="_blank">Google Map</a>
+
+      <div class="sl">✨ 表參道美食</div>
+      <p>🍡 太宰府梅枝餅</p>
+      <p>🍓 草莓最中·大福 天山本店</p>
+      <a class="ml" href="https://share.google/XSVdG9Ey15DT1q0I4" target="_blank">天山本店</a>
+      <p>🍝 明太子茶泡飯</p>
+      <a class="ml" href="https://maps.app.goo.gl/Qyrwp4SHG28jrF1z8" target="_blank">Aji no Mentaiko Fukuya</a>
+      <p>🍜 一蘭 太宰府參道店</p>
+      <a class="ml" href="https://maps.app.goo.gl/5unh9NED8HodwiZu5" target="_blank">一蘭</a>
+      <p>🍖 上岡屋 和牛小丼飯</p>
+      <a class="ml" href="https://maps.app.goo.gl/1KyFgBZREeazV3zz9" target="_blank">上岡屋</a>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-spot">景點</span> 寶滿宮竈門神社</div>
+      <p>🔥 鬼滅之刃朝聖景點｜公車約10分鐘</p>
+      <div class="ir"><span class="l">⏰ 開放</span>8:30～18:00</div>
+      <a class="ml" href="https://maps.app.goo.gl/dbCpoqL41b12iajU7" target="_blank">Google Map</a>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-spot">景點</span> 九州國立博物館</div>
+      <div class="ir"><span class="l">⏰ 開放</span>9:30～17:00（週一休）</div>
+      <div class="ir"><span class="l">🚶 交通</span>西鐵太宰府站徒步約10分鐘</div>
+      <a class="ml" href="https://maps.app.goo.gl/ZvRp4ghv8yxYfMUA9" target="_blank">Google Map</a>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-shop">下午</span> 🛍️ 天神主力採購</div>
+
+      <p><strong>福岡PARCO</strong>｜地鐵天神站西口7號出口直通</p>
+      <a class="ml" href="https://maps.app.goo.gl/LwmniXCS7p6uyhA1A" target="_blank">PARCO</a>
+      <a class="ml" href="https://maps.app.goo.gl/GoiJ2Eo3YzoAKrBs8" target="_blank">Onitsuka Tiger PARCO店</a>
+
+      <p style="margin-top:.4rem"><strong>LOFT 天神店</strong>｜文具、美妝、療癒小物</p>
+      <a class="ml" href="https://maps.app.goo.gl/EozTywhuSykQc2HQ7" target="_blank">LOFT</a>
+
+      <p style="margin-top:.4rem"><strong>UNIQLO 天神店</strong>｜款式最齊・可退稅</p>
+      <a class="ml" href="https://maps.app.goo.gl/vqX2u9pMtrWmFhHU6" target="_blank">UNIQLO</a>
+
+      <p style="margin-top:.4rem"><strong>BIC CAMERA 天神1號館</strong></p>
+      <a class="ml" href="https://maps.app.goo.gl/wJ8CbLGFQBroCes68" target="_blank">BIC CAMERA</a>
+
+      <p style="margin-top:.4rem"><strong>Mina 天神</strong>｜直通天神地下街</p>
+      <a class="ml" href="https://maps.app.goo.gl/YhVfrwnX24Y5zKw89" target="_blank">Mina天神</a>
+
+      <p style="margin-top:.4rem"><strong>graniph 福岡天神</strong>｜日本潮流設計品牌｜10-21時</p>
+      <a class="ml" href="https://maps.app.goo.gl/Bbico5CPsNuGsTKr5" target="_blank">graniph</a>
+
+      <p style="margin-top:.4rem">☕ <strong>Blue Bottle Coffee</strong></p>
+      <a class="ml" href="https://maps.app.goo.gl/qvBkRwGowNcgKy6MA" target="_blank">Blue Bottle</a>
+
+      <p style="margin-top:.4rem">☕ <strong>FEELS GOOD</strong>（選物咖啡廳）</p>
+      <a class="ml" href="https://maps.app.goo.gl/2ePt2NsScnjE68tbA" target="_blank">FEELS GOOD</a>
+    </div></div>
   </div>
 </div>
 
-<!-- ============ DAY 4 ============ -->
+<!-- ==================== DAY 4 ==================== -->
 <div id="day4">
   <div class="day-header">
     <div class="day-num">04</div>
     <div class="day-info">
-      <h2>04/28（二）</h2>
-      <span>回程日</span>
+      <h2>04/28（二）回程日</h2>
+      <span>大濠公園→美術館→機場</span>
     </div>
   </div>
-  <div class="card" style="margin-top:1rem;text-align:center;padding:2rem;color:var(--subtle);">
-    <p>📝 尚未提供 Day 4 行程</p>
-    <p style="font-size:0.8rem;">可自行加入規劃</p>
+
+  <div class="fc">
+    <div class="ft">✈️ FUK→TPE 17:55→19:25</div>
+    <div class="ft" style="margin-top:.3rem">約 15:00 出發往機場</div>
+    <div class="ft" style="opacity:.7;font-size:.78rem;margin-top:.3rem">🚗 已預訂司機接送回家（$900元）</div>
+  </div>
+
+  <div class="timeline">
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-spot">景點</span> 大濠公園</div>
+      <a class="ml" href="https://maps.app.goo.gl/jS8UgdpBbZaGNQcs7" target="_blank">Google Map</a>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-spot">景點</span> 福岡市美術館</div>
+      <p>⚠️ 星期一休息</p>
+      <a class="ml" href="https://maps.app.goo.gl/qcSufp6AA3uhkPc16" target="_blank">美術館</a>
+      <a class="ml" href="https://maps.app.goo.gl/MZcJYBV7ENGjtE3w8" target="_blank">草間彌生南瓜雕刻</a>
+    </div></div>
+
+    <div class="ti"><div class="card">
+      <div class="card-title"><span class="tag tag-shop">補貨</span> 最後機會</div>
+      <p>UNIQLO 博多店可做最後補貨點</p>
+      <div class="hl">
+        🎯 省錢技巧：<br>
+        🧾 UNIQLO 可退稅（滿額）<br>
+        🎟️ LOFT 常有季節折扣<br>
+        🛍️ 建議帶一個可折行李袋<br>
+        👕 基本款不急，熱門款看到就買
+      </div>
+    </div></div>
   </div>
 </div>
 
-<!-- ============ INFO ============ -->
-<div id="info">
-  <div class="section-label">📌 實用資訊</div>
+<!-- ==================== 美食清單 ==================== -->
+<div id="food">
+  <div class="day-header" style="background:var(--accent)">
+    <div class="day-num">🍽️</div>
+    <div class="day-info">
+      <h2>美食清單</h2>
+      <span>博多・天神・太宰府・門司港</span>
+    </div>
+  </div>
 
-  <div class="card" style="margin-bottom:0.8rem;">
-    <div class="card-title"><span class="tag tag-transport">交通</span> 福岡機場到博多</div>
+  <div class="sl">🍱 博多正餐</div>
+  <div class="restaurant-list">
+    <div class="card"><div class="card-title"><span class="tag tag-food">牛肉</span> 博多牛まぶし 武蔵</div><div class="ir"><span class="l">💰</span>¥3,000起｜博多站筑紫口2分</div><a class="ml" href="https://maps.app.goo.gl/9SpRwwjAvZpTxZrX9" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">漢堡排</span> 極味屋 博多店</div><div class="ir"><span class="l">📍</span>博多站中央街2-1 1階</div><a class="ml" href="https://maps.app.goo.gl/oZK8VuVMh4bQWEVAA" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">牛腸鍋</span> 前田屋</div><div class="ir"><span class="l">📍</span>大名1-12-28</div><a class="ml" href="https://maps.app.goo.gl/rpdN6pmZXQV1SoTE7" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">牛腸鍋</span> 博多牛腸鍋大山 總店</div><div class="ir"><span class="l">📍</span>天屋町7-28｜離住宿走路2分鐘</div><a class="ml" href="https://maps.app.goo.gl/mF9Nq6XfzT6GNyJ69" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">牛舌</span> たんやHAKATA</div><div class="ir"><span class="l">📍</span>博多1番街 B1F</div><a class="ml" href="https://maps.app.goo.gl/gVUE3DzRHNRzGU5L9" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">燒肉</span> 烤肉 石原牛</div><div class="ir"><span class="l">📍</span>博多リバレイン 1F</div><a class="ml" href="https://maps.app.goo.gl/Z1Ssy8VWqNNV1XVB7" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">豬排</span> Yagura 豬排丼飯</div><a class="ml" href="https://maps.app.goo.gl/6tj6tEf3BzpSEU4o9" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">壽司</span> Sushi Sakaba Sashisu</div><div class="ir"><span class="l">📍</span>KITTE博多 B1</div><a class="ml" href="https://maps.app.goo.gl/JvjJCb7QxaUxu9537" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">水炊</span> 水炊・雞肉料理 とりまぶし</div><a class="ml" href="https://maps.app.goo.gl/F2TwFa2N54DdG3hr5" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">烤雞串</span> 博多かわ屋（祇園店）</div><div class="ir"><span class="l">📍</span>祇園町2-8｜推薦雞皮</div><a class="ml" href="https://maps.app.goo.gl/YknuL8LuVm7SuQr18" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">燒肉</span> 燒肉 泰元（同事推薦）</div><a class="ml" href="https://maps.app.goo.gl/vMNVPNJuZzjResp26" target="_blank">地圖</a></div>
+  </div>
+
+  <div class="sl">🍱 天神正餐</div>
+  <div class="restaurant-list">
+    <div class="card"><div class="card-title"><span class="tag tag-food">炸豬排</span> Wakaba</div><div class="ir"><span class="l">📍</span>天神1-15-36</div><a class="ml" href="https://maps.app.goo.gl/ZMu5RnypGVNH4BnY7" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">牛雜鍋</span> もつ鍋 やましょう</div><div class="ir"><span class="l">📍</span>渡辺通5-1-26｜天神南站6出口5分</div><a class="ml" href="https://maps.app.goo.gl/Wyst5eqnJKyJf9mq5" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">海鮮丼</span> 魚男 FishMan</div><div class="ir"><span class="l">📍</span>今泉1-4-23</div><a class="ml" href="https://maps.app.goo.gl/XCYx1J2XrsQ7Txz56" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">日式</span> Gaogao 大濠店（花籠御膳）</div><a class="ml" href="https://maps.app.goo.gl/TGvC3ox3Laj1Hyfm8" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">燒肉</span> 藥院燒肉 NIKUICHI</div><a class="ml" href="https://maps.app.goo.gl/RA3xpqh4GmzX68k18" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">海鮮</span> Hakata Seafood Uoden</div><div class="ir"><span class="l">📍</span>明太子玉子燒丼・海鮮丼</div><a class="ml" href="https://maps.app.goo.gl/tUGVVhvEYfCrqiuL8" target="_blank">地圖</a></div>
+  </div>
+
+  <div class="sl">🍱 門司港</div>
+  <div class="restaurant-list">
+    <div class="card"><div class="card-title"><span class="tag tag-food">咖哩</span> 伽哩本舖 門司港RETORO店</div><a class="ml" href="https://maps.app.goo.gl/YA25uL7fgQ6ZW3NR6" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">燒咖哩</span> Princess Phi Phi</div><a class="ml" href="https://maps.app.goo.gl/cp2k5atuTofeSF286" target="_blank">地圖</a></div>
+  </div>
+
+  <div class="sl">🍰 麵包・點心・下午茶</div>
+  <div class="restaurant-list">
+    <div class="card"><div class="card-title"><span class="tag tag-food">麵包</span> DACOMECCA 烤腸麵包</div><div class="ir"><span class="l">📍</span>博多站前4-14-1｜博多口5分</div><a class="ml" href="https://share.google/AA5ICIAdjnTo522VB" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">咖啡</span> FUK COFFEE（布丁）</div><div class="ir"><span class="l">📍</span>祇園町6-22</div><a class="ml" href="https://share.google/29n5oCh6jhDkaI3bc" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">甜點</span> 治一郎布丁</div><div class="ir"><span class="l">📍</span>博多阪急內</div><a class="ml" href="https://maps.app.goo.gl/c6uDFhmQqerr8hGF9" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">麵包</span> Bread, Espresso & Hakata</div><p>第一名推薦！建議一開門就排隊</p><a class="ml" href="https://maps.app.goo.gl/zL58Fdt8WsbC7k6FA" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">可頌</span> MIGNON 迷你可頌（博多站）</div><div class="ir"><span class="l">📍</span>JR博多站1F構內</div><a class="ml" href="https://maps.app.goo.gl/iRVLw3pxxSQEJEAP7" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">咖啡</span> &LOCALS 大濠公園</div><a class="ml" href="https://maps.app.goo.gl/BM3j4m56FN79Xyri6" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">甜點</span> Ropponpon 麻糬鯛魚燒</div><a class="ml" href="https://maps.app.goo.gl/ea88eHB3MR5UZkYi6" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">麵包</span> Full Full 明太子法國麵包</div><div class="ir"><span class="l">📍</span>天神3-3-5｜10-20時（週二休）</div><a class="ml" href="https://maps.app.goo.gl/gU8vLDx2FPfZG5398" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">麵包</span> Pain Stock 明太子法國麵包</div><a class="ml" href="https://maps.app.goo.gl/PuhxHQxNazWQmFWbA" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">蛋糕</span> Shiroya 奶油小蛋糕（小倉）</div><a class="ml" href="https://share.google/CgJuQ3SsyV4ToGBKg" target="_blank">地圖</a></div>
+    <div class="card"><div class="card-title"><span class="tag tag-food">抹茶</span> THE MATCHA TOKYO（機場）</div><p>福岡機場國際線航廈</p></div>
+  </div>
+</div>
+
+<!-- ==================== 購物 ==================== -->
+<div id="shop">
+  <div class="day-header" style="background:#b8860b">
+    <div class="day-num">🛍️</div>
+    <div class="day-info">
+      <h2>購物清單</h2>
+      <span>伴手禮・美妝・珠寶</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1rem;margin-bottom:.7rem">
+    <div class="card-title">💎 珠寶</div>
+    <p><strong>agete</strong></p>
+    <a class="ml" href="https://maps.app.goo.gl/ArofRGfGTa84px2fA" target="_blank">天神大丸店</a>
+    <a class="ml" href="https://maps.app.goo.gl/41kJoyvhKcVUX13d8" target="_blank">博多AMU PLAZA店</a>
+    <p style="margin-top:.3rem"><strong>Jouete L/</strong>（925純銀）</p>
+    <a class="ml" href="https://maps.app.goo.gl/dHE23bbTAwmjPsQ76" target="_blank">ONE FUKUOKA BLDG 2F</a>
+  </div>
+
+  <div class="card" style="margin-bottom:.7rem">
+    <div class="card-title">🎮 任天堂直營店</div>
+    <p>AMU PLAZA 博多 8F｜10:00-20:00</p>
+    <p>限定 Logo T-shirt、皮克敏/瑪利歐周邊</p>
+    <a class="ml" href="https://maps.app.goo.gl/1FVbR1XSW2QT1zTa8" target="_blank">Google Map</a>
+  </div>
+
+  <div class="card" style="margin-bottom:.7rem">
+    <div class="card-title">🏪 唐吉訶德 中洲店</div>
+    <p>離住宿走路約7分鐘</p>
+    <a class="ml" href="https://maps.app.goo.gl/Dwh6DZzAVrVXwcoX8" target="_blank">Google Map</a>
+  </div>
+
+  <div class="card" style="margin-bottom:.7rem">
+    <div class="card-title">🎁 必買清單</div>
     <ul>
-      <li>搭免費接駁巴士到機場地鐵站</li>
-      <li>地鐵空港線到博多站（K11）約 5 分鐘</li>
-      <li>博多站到中洲川端站 1 站</li>
+      <li>KATE 怪獸唇膏 04、16</li>
+      <li>BCL Tsururi 小鼻溫感酵素凝膠筆</li>
+      <li>Myboostars 膠原蛋白修護髮乳 120ml（松本清）</li>
+      <li>堀西萬能調味粉（Loft）</li>
+      <li>島本明太子（博多阪急B1 / 博多站前店）</li>
+      <li>Kao 花王 THE ANSWER 洗髮精</li>
+      <li>IHADA 資生堂晚安面膜</li>
+      <li>齒磨殿堂 美白牙膏</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== 住宿 & 小貼士 ==================== -->
+<div id="tips">
+  <div class="day-header" style="background:var(--teal)">
+    <div class="day-num">📌</div>
+    <div class="day-info">
+      <h2>實用資訊</h2>
+      <span>住宿・交通・出入境</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1rem;margin-bottom:.7rem">
+    <div class="card-title"><span class="tag tag-hotel">住宿</span> 中洲川端東方快捷酒店</div>
+    <p>🚇 距離「中洲川端站」約3-4分鐘</p>
+    <p>✈️ 福岡機場搭地鐵直達（不用轉車！）</p>
+    <a class="ml" href="https://maps.app.goo.gl/HQRPrkGhP5XnnnL29" target="_blank">Google Map</a>
+  </div>
+
+  <div class="card" style="margin-bottom:.7rem">
+    <div class="card-title"><span class="tag tag-transport">交通</span> 機場到市區</div>
+    <ul>
+      <li>國際線航廈 → 免費接駁巴士（1號乘車處，每5-10分一班）→ 國內線地鐵站</li>
+      <li>地鐵空港線到博多 約5分鐘，到天神 約10-15分鐘</li>
+      <li>建議準備 ICOCA/Suica 或 Apple Pay 交通卡</li>
+      <li>地鐵一日券 約 ¥640</li>
     </ul>
   </div>
 
-  <div class="card" style="margin-bottom:0.8rem;">
-    <div class="card-title"><span class="tag tag-tip">提醒</span> 重要注意事項</div>
+  <div class="card" style="margin-bottom:.7rem">
+    <div class="card-title"><span class="tag tag-tip">入境</span> 日本入境流程</div>
     <ul>
-      <li>04:00 出發前往機場，提前一晚準備好行李</li>
-      <li>機場接送費 $1,000 元</li>
-      <li>博多牛まぶし 建議 11:00 前到</li>
-      <li>運河城水舞秀每整點一場（有音樂）</li>
-      <li>屋台約傍晚開始營業</li>
+      <li>持中華民國護照免簽</li>
+      <li>出發前在 Visit Japan Web 填寫資料，截圖 QR Code</li>
+      <li>抵達→自助通關KIOSK（掃QR、護照、指紋、拍照）→入國審查→領行李→電子閘口→入境</li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-bottom:.7rem">
+    <div class="card-title"><span class="tag tag-tip">出境</span> 福岡機場出境流程</div>
+    <ul>
+      <li>3F 報到櫃台（建議提早2.5-3小時）</li>
+      <li>2F 安全檢查（液體<100ml）</li>
+      <li>2F 出境審查（撕免稅單據交海關）</li>
+      <li>免稅店購物 → 登機門</li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-bottom:.7rem">
+    <div class="card-title"><span class="tag tag-tip">提醒</span> 重要注意</div>
+    <ul>
+      <li>天氣早晚溫差大：薄外套+針織衫+短袖</li>
+      <li>Tax-Free 退稅需帶護照</li>
+      <li>PayPay 普及，信用卡也方便</li>
+      <li>必備：個人藥物、濕紙巾、行動電源、雨傘</li>
+      <li>eSIM 推薦，免換卡</li>
     </ul>
   </div>
 
   <div class="card">
-    <div class="card-title">🗺️ 關鍵地鐵站</div>
-    <ul>
-      <li><strong>博多站</strong>（K11）— 牛まぶし、轉車樞紐</li>
-      <li><strong>中洲川端站</strong> — 飯店、運河城</li>
-      <li><strong>祇園站</strong> — 櫛田神社</li>
-      <li><strong>櫛田神社前站</strong> — 運河城最近站</li>
-      <li><strong>大濠公園站</strong> — 飯店</li>
-    </ul>
+    <div class="card-title">🗺️ 備用景點</div>
+    <a class="ml" href="https://maps.app.goo.gl/ps4h8Z1itsNLHtQ19" target="_blank">福岡城 舞鶴公園</a>
+    <a class="ml" href="https://maps.app.goo.gl/EqMeRFYnYNCmc99LA" target="_blank">川端通商店街</a>
+    <a class="ml" href="https://maps.app.goo.gl/zLdf6kHt8x6jwwS47" target="_blank">壱岐神社一之鳥居</a>
+    <a class="ml" href="https://maps.app.goo.gl/brcUt8TvWHzEH2hC6" target="_blank">警固神社</a>
   </div>
 </div>
 
-</div><!-- end container -->
+</div>
 
-<div class="offline-badge">📱 離線可用</div>
+<div class="ob">📱 離線可用 ・ 點📍開地圖</div>
 
 </body>
 </html>
